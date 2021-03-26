@@ -18,7 +18,7 @@ db = SQLAlchemy(app)
 
 # Helper Table
 users_has_service_types = db.Table('users_has_service_types',
-    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
     db.Column('service_types_id', db.Integer, db.ForeignKey('service_types.id'), primary_key=True)
 )
 
@@ -45,7 +45,7 @@ class Providers(db.Model):
     def __repr__(self):
         return '<Provider{}>'.format(self.name)
 
-class Service_Types(db.Model):
+class Service_types(db.Model):
     id = db.Column('id', db.Integer, primary_key=True)
     service_type = db.Column('type', db.String(64), nullable=False)
     providers = db.relationship('Providers', backref='service_type', lazy=True)
