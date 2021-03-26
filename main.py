@@ -6,7 +6,7 @@ from flask import (
 )
 import datetime
 from flask_sqlalchemy import SQLAlchemy
-from data import test
+from data import test, mock_users
 
 # Create Flask application instance 
 app = Flask(__name__)
@@ -28,7 +28,7 @@ class Users(db.Model):
     id = db.Column('id', db.Integer, primary_key=True)
     cellphone_number = db.Column('cellphone_number', db.String(120), nullable=False, unique=True)
     zip_code = db.Column('zip_code', db.Integer, nullable=False)
-    users_has_service_types = db.relationship('Service_Types', secondary=users_has_service_types, lazy='subquery', backref=db.backref('users', lazy=True))
+    users_has_service_types = db.relationship('Service_types', secondary=users_has_service_types, lazy='subquery', backref=db.backref('users', lazy=True))
     def __repr__(self):
         return '<User {}>'.format(self.cellphone_number)
 
@@ -60,6 +60,18 @@ class Events(db.Model):
     providers_id = db.Column(db.Integer, db.ForeignKey('providers.id'), nullable=False)
     def __repr__(self):
         return '<Event{}>'.format(self.id)
+
+# Add data to database from data.py
+for user in mock_users:
+    print(user)
+    user_data = Users(
+        id=user['id'],
+        cellphone_number=user['cellphone_number'],
+        zip_code=user['zip_code']
+    )
+    db.session.add(user_data)
+    db.session.commit()
+    print('All Users',Users.query.all())
 
 # Routes
 @app.route('/', methods=['GET'])
