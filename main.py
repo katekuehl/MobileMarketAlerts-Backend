@@ -4,9 +4,9 @@ from flask import (
     redirect,
     url_for,
 )
-import datetime
+from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from data import test, mock_users_data, providers_data, service_types_data
+from data import test_datetime, mock_users_data, providers_data, service_types_data, events_data
 
 # Create Flask application instance 
 app = Flask(__name__)
@@ -62,34 +62,34 @@ class Events(db.Model):
     def __repr__(self):
         return '<Event{}>'.format(self.id)
 
-db.drop_all()
-db.create_all()
+db.drop_all() # Clear the db
+db.create_all() # Create the db
 
-#Add data to database from data.py (only need to do this once to generate the db.content)
+# Add data to database from data.py (only need to do this once to generate the db.content)
 for user in mock_users_data:
-    print(user)
+    #print(user)
     user_data = Users(
         id=user['id'],
         cellphone_number=user['cellphone_number'],
         zip_code=user['zip_code']
     )
     db.session.add(user_data)
-    print('All Users',Users.query.all())
+    #print('All Users',Users.query.all())
 
 for service in service_types_data:
-    print(service)
+    #print(service)
     service_data = Service_types(
         id=service['id'],
         service_type=service['service_type']
     )
     db.session.add(service_data)
-    print('All Service Types', Service_types.query.all())
+    #print('All Service Types', Service_types.query.all())
 
 for provider in providers_data:
-    print(provider['name'], provider['service_type_id'])
-    # Get service_type based on service_type_id
+    #print(provider['name'], provider['service_type_id'])
+    # Get service_type database object based on service_type_id
     service_type = Service_types().query.filter_by(id=provider['service_type_id']).first()
-    print('Query service type id', service_type, service_type.id)
+    #print('Query service type object', service_type, service_type.id)
 
     provider_data = Providers(
         id=provider['id'],
@@ -101,7 +101,22 @@ for provider in providers_data:
     )
    
     db.session.add(provider_data)
-    print('All Providers', Providers.query.all())
+    #print('All Providers', Providers.query.all())
+
+for event in events_data:
+    print('Event', event)
+    # # Get corresponding provider database object based on providers_id
+    # provider = Providers().query.filter_by(id=event['providers_id']).first()
+    # print('Provider database object', provider)
+    
+    # event_data = Events(
+    #     id=event['id'],
+    #     start_datetime=['start_datetime'],
+    #     end_datetime=['end_datetime'],
+    #     providers_id=provider.id
+    # )
+
+    # db.session.add(event_data)
 
 #Commit all data to db
 db.session.commit()
@@ -110,9 +125,13 @@ db.session.commit()
 print('All Users', Users.query.all())
 print('All Providers', Providers.query.all())
 print('All Service Types', Service_types.query.all())
+print('All Events', Events.query.all())
+
+# Test datetime format
+#date = datetime(2021, 3, 27, 15, 30)
+#print('Date', date)
 
 # Routes
 @app.route('/', methods=['GET'])
 def index():
-    print(test)
     return Response('test', status=200, mimetype='text/html')
