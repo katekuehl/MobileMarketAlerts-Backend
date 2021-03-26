@@ -6,7 +6,7 @@ from flask import (
 )
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from data import test_datetime, mock_users_data, providers_data, service_types_data, events_data
+from data import mock_users_data, providers_data, service_types_data, events_data
 
 # Create Flask application instance 
 app = Flask(__name__)
