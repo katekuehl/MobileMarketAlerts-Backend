@@ -6,6 +6,7 @@ from flask import (
 )
 
 from flask_sqlalchemy import SQLAlchemy
+from data import test
 
 # Create Flask application instance 
 app = Flask(__name__)
@@ -24,8 +25,9 @@ class Users(db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.cellphone_number)
-    
+
+# Routes
 @app.route('/', methods=['GET'])
 def index():
-    print('Hello, World!')
+    print(test)
     return Response('test', status=200, mimetype='text/html')
