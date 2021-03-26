@@ -104,19 +104,19 @@ for provider in providers_data:
     #print('All Providers', Providers.query.all())
 
 for event in events_data:
-    print('Event', event)
-    # # Get corresponding provider database object based on providers_id
-    # provider = Providers().query.filter_by(id=event['providers_id']).first()
-    # print('Provider database object', provider)
+    #print('Event', event)
+    # Get corresponding provider database object based on providers_id
+    provider = Providers().query.filter_by(id=event['providers_id']).first()
+    #print('Provider database object', provider, provider.id)
     
-    # event_data = Events(
-    #     id=event['id'],
-    #     start_datetime=['start_datetime'],
-    #     end_datetime=['end_datetime'],
-    #     providers_id=provider.id
-    # )
+    event_data = Events(
+        id=event['id'],
+        start_datetime=event['start_datetime'],
+        end_datetime=event['end_datetime'],
+        providers_id=provider.id
+    )
 
-    # db.session.add(event_data)
+    db.session.add(event_data)
 
 #Commit all data to db
 db.session.commit()
