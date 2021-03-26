@@ -25,42 +25,48 @@ providers_data = [
         'name': 'West Broadway Farmers Market',
         'address': '2034 W Broadway Ave, Minneapolis, MN 55411',
         'description': 'Friday, weekly. Between 6/18/2021 - 10/1/2021.',
-        'website': 'https://www.facebook.com/westbroadwayfarmersmarket/'
+        'website': 'https://www.facebook.com/westbroadwayfarmersmarket/',
+        'service_type_id': 1
     },
     {
         'id': 2,
         'name': 'Minneapolis Farmers Market',
         'address': '312 East Lyndale Ave N, Minneapolis, MN 55405',
         'description': '',
-        'website': 'https://www.mplsfarmersmarket.com/FreshNews/ebt/'
+        'website': 'https://www.mplsfarmersmarket.com/FreshNews/ebt/',
+        'service_type_id': 1
     },
     {
         'id': 3,
         'name': 'Minneapolis Northeast Farmers Market',
         'address': '629 NE 2nd St, Minneapolis, MN 55413',
         'description': 'Saturday, weekly. Between 5/15/2021 - 10/16/2021.',
-        'website': 'https://www.northeastfarmersmarket.com/'
+        'website': 'https://www.northeastfarmersmarket.com/',
+        'service_type_id': 1
     },
     {
         'id': 4,
         'name': 'Loaves & Fishes at Salvation Army North',
         'address': '2024 Lyndale Ave N, Minneapolis, MN 55411',
         'description': 'Monday - Friday, weekly',
-        'website': 'https://www.loavesandfishesmn.org/dining-sites/salvation-army-north-parkview/'
+        'website': 'https://www.loavesandfishesmn.org/dining-sites/salvation-army-north-parkview/',
+        'service_type_id': 2
     },
     {
         'id': 5,
         'name': 'Loaves & Fishes at New Bethel',
         'address': '1115 30th Ave North, Minneapolis, MN 55411',
         'description': 'Monday - Friday, weekly',
-        'website': 'https://www.loavesandfishesmn.org/dining-sites/new-bethel-baptist-church/'
+        'website': 'https://www.loavesandfishesmn.org/dining-sites/new-bethel-baptist-church/',
+        'service_type_id': 2
     },
     {
         'id': 6,
         'name': 'Al-Maa’uun',
         'address': '1729 Lyndale Avenue North, Minneapolis, MN 55411',
         'description': 'Every 3rd Saturday, monthly',
-        'website': 'http://masjidannur.org/al-maauun-food-program/'
+        'website': 'http://masjidannur.org/al-maauun-food-program/',
+        'service_type_id': 2
     },
     {
         'id': 7,
@@ -68,6 +74,7 @@ providers_data = [
         'address': '1835 Penn Ave N, Minneapolis, MN 55411',
         'description': 'Monday - Thursday, weekly',
         'website': 'https://www.northpointhealth.org/',
+        'service_type_id': 3
     },
     {
         'id': 8,
@@ -75,6 +82,7 @@ providers_data = [
         'address': '1729 Lyndale Ave N, Minneapolis, MN 55412' ,
         'description': 'Every 3rd Saturday, monthly',
         'website': 'http://masjidannur.org/partners-affiliation/al-maauun/food-program/',
+        'service_type_id': 3
     },
     {
         'id': 9,
@@ -82,9 +90,23 @@ providers_data = [
         'address': '2827 Newton Ave N, Minneapolis, MN 55411',
         'description': 'Every 2nd & 4th Thursday, monthly',
         'website': 'https://www.goodinthehood.org/our-programs/feeding-the-future/food-in-the-hood/',
+        'service_type_id': 3
     }
 ]
 
-service_types_data = []
+service_types_data = [
+    {
+        'id': 1,
+        'service_type': 'Farmers Market'
+    },
+    {
+        'id': 2,
+        'service_type': 'Free Meals'
+    },
+    {
+        'id': 3,
+        'service_type': 'Food Shelf'
+    }
+]
 
 events_data = []

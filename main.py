@@ -6,7 +6,7 @@ from flask import (
 )
 import datetime
 from flask_sqlalchemy import SQLAlchemy
-from data import test, mock_users_data, providers_data
+from data import test, mock_users_data, providers_data, service_types_data
 
 # Create Flask application instance 
 app = Flask(__name__)
@@ -58,38 +58,51 @@ class Events(db.Model):
     start_datetime = db.Column('start_datetime', db.DateTime, nullable=False)
     end_datetime = db.Column('end_datetime', db.DateTime, nullable=False)
     providers_id = db.Column(db.Integer, db.ForeignKey('providers.id'), nullable=False)
+    
     def __repr__(self):
         return '<Event{}>'.format(self.id)
 
 # Add data to database from data.py
 for user in mock_users_data:
     #print(user)
-    user_data = Users(
-        id=user['id'],
-        cellphone_number=user['cellphone_number'],
-        zip_code=user['zip_code']
-    )
-    db.session.add(user_data)
-    db.session.commit()
+    # user_data = Users(
+    #     id=user['id'],
+    #     cellphone_number=user['cellphone_number'],
+    #     zip_code=user['zip_code']
+    # )
+    # db.session.add(user_data)
     print('All Users',Users.query.all())
 
-# for provider in providers_data:
-#     print(provider)
-#     provider_data = Providers(
-#         id=provider['id'],
-#         name=provider['name'],
-#         address=provider['address'],
-#         description=provider['description'],
-#         website=provider['website']
-#     )
-#     #fix this!
-#     provider_data.service_type.append(Service_types(id=1))
-#     db.session.add(provider_data)
-#     # #db.session.commit()
-#     print('All Providers', Providers.query.all())
+for service in service_types_data:
+    #print(service)
+    # service_data = Service_types(
+    #     id=service['id'],
+    #     service_type=service['service_type']
+    # )
+    # db.session.add(service_data)
+    print('All Service Types', Service_types.query.all())
+
+for provider in providers_data:
+    print(provider['name'], provider['service_type_id'])
+    # Get service_type based on service_type_id
+    service_type = Service_types().query.filter_by(id=provider['service_type_id']).first()
+    service_type_id = service_type.id
+    print('Query service type id', service_type, service_type_id)
+
+    provider_data = Providers(
+        id=provider['id'],
+        name=provider['name'],
+        address=provider['address'],
+        description=provider['description'],
+        website=provider['website'],
+        service_types_id='test'
+    )
+   
+    db.session.add(provider_data)
+    print('All Providers', Providers.query.all())
 
 # Commit all data to db
-
+db.session.commit()
 
 # Routes
 @app.route('/', methods=['GET'])
