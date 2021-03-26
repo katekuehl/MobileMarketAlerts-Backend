@@ -1,7 +1,8 @@
 from datetime import datetime
 
-test_datetime = datetime(2021, 6, 18, 15)
-print('From data.py', test_datetime)
+# Datetime import check
+#test_datetime = datetime(2021, 6, 18, 15)
+#print('From data.py', test_datetime)
 
 # Data to be imported into database. Structured as list of dicts.
 mock_users_data = [
