@@ -62,51 +62,55 @@ class Events(db.Model):
     def __repr__(self):
         return '<Event{}>'.format(self.id)
 
-# #Add data to database from data.py (only need to do this once to generate the db.content)
-# for user in mock_users_data:
-#     print(user)
-#     user_data = Users(
-#         id=user['id'],
-#         cellphone_number=user['cellphone_number'],
-#         zip_code=user['zip_code']
-#     )
-#     db.session.add(user_data)
-#     print('All Users',Users.query.all())
+db.drop_all()
+db.create_all()
 
-# for service in service_types_data:
-#     print(service)
-#     service_data = Service_types(
-#         id=service['id'],
-#         service_type=service['service_type']
-#     )
-#     db.session.add(service_data)
-#     print('All Service Types', Service_types.query.all())
+#Add data to database from data.py (only need to do this once to generate the db.content)
+for user in mock_users_data:
+    print(user)
+    user_data = Users(
+        id=user['id'],
+        cellphone_number=user['cellphone_number'],
+        zip_code=user['zip_code']
+    )
+    db.session.add(user_data)
+    print('All Users',Users.query.all())
 
-# for provider in providers_data:
-#     print(provider['name'], provider['service_type_id'])
-#     # Get service_type based on service_type_id
-#     service_type = Service_types().query.filter_by(id=provider['service_type_id']).first()
-#     print('Query service type id', service_type, service_type.id)
+for service in service_types_data:
+    print(service)
+    service_data = Service_types(
+        id=service['id'],
+        service_type=service['service_type']
+    )
+    db.session.add(service_data)
+    print('All Service Types', Service_types.query.all())
 
-#     provider_data = Providers(
-#         id=provider['id'],
-#         name=provider['name'],
-#         address=provider['address'],
-#         description=provider['description'],
-#         website=provider['website'],
-#         service_types_id=service_type.id
-#     )
+for provider in providers_data:
+    print(provider['name'], provider['service_type_id'])
+    # Get service_type based on service_type_id
+    service_type = Service_types().query.filter_by(id=provider['service_type_id']).first()
+    print('Query service type id', service_type, service_type.id)
+
+    provider_data = Providers(
+        id=provider['id'],
+        name=provider['name'],
+        address=provider['address'],
+        description=provider['description'],
+        website=provider['website'],
+        service_types_id=service_type.id
+    )
    
-#     db.session.add(provider_data)
-#     print('All Providers', Providers.query.all())
+    db.session.add(provider_data)
+    print('All Providers', Providers.query.all())
 
-# #Commit all data to db
-# db.session.commit()
+#Commit all data to db
+db.session.commit()
 
 # Confirm all starter data is in database
 print('All Users', Users.query.all())
 print('All Providers', Providers.query.all())
 print('All Service Types', Service_types.query.all())
+
 # Routes
 @app.route('/', methods=['GET'])
 def index():
