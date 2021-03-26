@@ -1,4 +1,7 @@
-test = "Hello there!"
+from datetime import datetime
+
+test_datetime = datetime(2021, 6, 18, 15)
+print('From data.py', test_datetime)
 
 # Data to be imported into database. Structured as list of dicts.
 mock_users_data = [
@@ -109,4 +112,59 @@ service_types_data = [
     }
 ]
 
-events_data = []
+events_data = [
+    {
+        'id': 1,
+        'start_datetime': datetime(2021, 6, 18, 15),
+        'end_datetime': datetime(2021, 6, 18, 19),
+        'providers_id': 1
+    },
+    {
+        'id': 2,
+        'start_datetime': datetime(2021, 4, 3, 9),
+        'end_datetime': datetime(2021, 4, 3, 12),
+        'providers_id': 2
+    },
+    {
+        'id': 3,
+        'start_datetime': datetime(2021, 5, 15, 9),
+        'end_datetime': datetime(2021, 5, 15, 13),
+        'providers_id': 3
+    },
+    {
+        'id': 4,
+        'start_datetime': datetime(2021, 3, 29, 11, 30), 
+        'end_datetime': datetime(2021, 3, 29, 12, 30),
+        'providers_id': 4
+    },
+    {
+        'id': 5,
+        'start_datetime': datetime(2021, 3, 29, 17, 30),
+        'end_datetime': datetime(2021, 3, 29, 18, 30),
+        'providers_id': 5
+    },
+    {
+        'id': 6,
+        'start_datetime': datetime(2021, 4, 17, 15),
+        'end_datetime': datetime(2021, 4, 17, 17, 30),
+        'providers_id': 6
+    },
+    {
+        'id': 7,
+        'start_datetime': datetime(2021, 3, 29, 10),
+        'end_datetime': datetime(2021, 3, 29, 16),
+        'providers_id': 7
+    },
+    {
+        'id': 8,
+        'start_datetime': datetime(2021, 4, 17, 8),
+        'end_datetime': datetime(2021, 4, 17, 21, 30),
+        'providers_id': 8
+    },
+    {
+        'id': 9,
+        'start_datetime': datetime(2021, 4, 8, 17),
+        'end_datetime': datetime(2021, 4, 8, 20),
+        'providers_id': 9
+    }
+]
