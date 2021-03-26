@@ -6,7 +6,7 @@ from flask import (
 )
 import datetime
 from flask_sqlalchemy import SQLAlchemy
-from data import test, mock_users
+from data import test, mock_users_data, providers_data
 
 # Create Flask application instance 
 app = Flask(__name__)
@@ -39,7 +39,7 @@ class Providers(db.Model):
     address = db.Column('address', db.String(255), nullable=False)
     description = db.Column('description', db.String(255))
     website = db.Column('website', db.String(255))
-    service_types_id = db.Column(db.Integer, db.ForeignKey('service_types.id'), nullable=False)
+    service_types_id = db.Column(db.Integer, db.ForeignKey('service_types.id'))
     events = db.relationship('Events', backref='provider', lazy=True)
 
     def __repr__(self):
@@ -62,8 +62,8 @@ class Events(db.Model):
         return '<Event{}>'.format(self.id)
 
 # Add data to database from data.py
-for user in mock_users:
-    print(user)
+for user in mock_users_data:
+    #print(user)
     user_data = Users(
         id=user['id'],
         cellphone_number=user['cellphone_number'],
@@ -72,6 +72,24 @@ for user in mock_users:
     db.session.add(user_data)
     db.session.commit()
     print('All Users',Users.query.all())
+
+# for provider in providers_data:
+#     print(provider)
+#     provider_data = Providers(
+#         id=provider['id'],
+#         name=provider['name'],
+#         address=provider['address'],
+#         description=provider['description'],
+#         website=provider['website']
+#     )
+#     #fix this!
+#     provider_data.service_type.append(Service_types(id=1))
+#     db.session.add(provider_data)
+#     # #db.session.commit()
+#     print('All Providers', Providers.query.all())
+
+# Commit all data to db
+
 
 # Routes
 @app.route('/', methods=['GET'])
