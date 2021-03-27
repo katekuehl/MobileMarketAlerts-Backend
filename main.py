@@ -4,10 +4,11 @@ from flask import (
     Response,
     redirect,
     url_for,
+    jsonify
 )
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from data import mock_users_data, providers_data, service_types_data, events_data
 from sms import Twilio
 
@@ -137,16 +138,17 @@ print('All Events', Events.query.all())
 
 # Routes
 @app.route('/api', methods=['GET', 'POST'])
+@cross_origin()
 def index():
     if request.method == 'GET':
         return Response('test', status=200, mimetype='text/html')
     if request.method == 'POST':
         req_data = request.get_json(force=True)
-        client_phone = req_data['client_phone']
+        cellphone_number = req_data['cellphone_number']
         market = req_data['market']
-        time_start = req_data['time_start']
-        time_end = req_data['time_end']
+        start_datetime = req_data['start_datetime']
+        end_datetime = req_data['end_datetime']
         try:
-            return Twilio.send_message(client_phone, market, time_start, time_end), 200
+            return Twilio.send_message(cellphone_number, market, start_datetime, end_datetime), 200
         except():
             return 'test', 400
