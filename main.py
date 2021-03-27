@@ -4,15 +4,16 @@ from flask import (
     Response,
     redirect,
     url_for,
+    jsonify
 )
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from data import mock_users_data, providers_data, service_types_data, events_data
 
 # Create Flask application instance 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+cors = CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mobilefoodalerts.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -135,13 +136,15 @@ print('All Events', Events.query.all())
 #print('Date', date)
 
 # Routes
-@app.route('/', methods=['GET'])
+@app.route('/api', methods=['GET', 'POST'])
+@cross_origin()
 def index():
     if request.method == 'GET':
         return Response('test', status=200, mimetype='text/html')
-    if request.method == ['POST']:
+    if request.method == 'POST':
         # Find out what preferences the user has signed up for by reviewing data from form
         # Convert checkbox value to int
         form_preference = [1,2,3]
         # Mock data (based on service_type_id)
-        preference = 
+        return 'data'
+     
