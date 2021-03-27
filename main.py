@@ -6,10 +6,12 @@ from flask import (
 )
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from data import mock_users_data, providers_data, service_types_data, events_data
 
 # Create Flask application instance 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mobilefoodalerts.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
