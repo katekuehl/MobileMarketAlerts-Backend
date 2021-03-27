@@ -1,7 +1,7 @@
 
 # Download the helper library from https://www.twilio.com/docs/python/install
 import os
-from twilio.rest import Client
+from sms.rest import Client
 
 class Twilio():
     # Your Account Sid and Auth Token from twilio.com/console

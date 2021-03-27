@@ -3,4 +3,6 @@ The backend of a project for Hack the Gap to alert people when farmers markets o
 
 Run `pip install -r requirements.txt` to install python libraries
 
+To update the requirements.txt file after installing packages, run `pip freeze > requirements.txt`
+
 Run `flask run` to run the flask project
