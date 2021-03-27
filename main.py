@@ -144,7 +144,9 @@ def index():
     if request.method == 'POST':
         # Find out what preferences the user has signed up for by reviewing data from form
         # Convert checkbox value to int
-        form_preference = [1,2,3]
-        # Mock data (based on service_type_id)
+        title = request.form['title']
+        body = request.form['body']
+        # Form data check 
+        console.log(title, body)
         return 'data'
      
