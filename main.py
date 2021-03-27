@@ -1,5 +1,6 @@
 from flask import (
     Flask,
+    request,
     Response,
     redirect,
     url_for,
@@ -134,4 +135,11 @@ print('All Events', Events.query.all())
 # Routes
 @app.route('/', methods=['GET'])
 def index():
-    return Response('test', status=200, mimetype='text/html')
+    if request.method == 'GET':
+        return Response('test', status=200, mimetype='text/html')
+    if request.method == ['POST']:
+        # Find out what preferences the user has signed up for by reviewing data from form
+        # Convert checkbox value to int
+        form_preference = [1,2,3]
+        # Mock data (based on service_type_id)
+        preference = 
